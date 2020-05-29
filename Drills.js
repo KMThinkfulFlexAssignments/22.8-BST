@@ -146,8 +146,57 @@ function thirdLargest(tree) {
   }
   return largest;
 }
-console.log(thirdLargest(numberBST()));
+//console.log(thirdLargest(numberBST()));
 
 //8. Balanced BST
+function shortestBranch(tree) {
+  if(!tree) {
+    return 0;
+  } else {
+    return Math.min(shortestBranch(tree.right), shortestBranch(tree.left)) + 1;
+  }
+}
+
+function longestBranch(tree) {
+  if(!tree) {
+    return 0;
+  } else {
+    return Math.max(longestBranch(tree.right), longestBranch(tree.left)) + 1;
+  }
+}
+
+function isBalanced(tree) {
+  let shortest = shortestBranch(tree);
+  let longest = longestBranch(tree);
+
+  if (longest - shortest > 1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+const balancedTree = new BinarySearchTree;
+balancedTree.insert(5, 5);
+balancedTree.insert(4, 4);
+balancedTree.insert(6, 6);
+
+//console.log(isBalanced(numberBST()));
+//console.log(isBalanced(balancedTree));
 
 //9. Are they the same BSTs?
+function matchingBST(arry1, arry2) {
+  if(arry1.length !== arry2.length) {
+    return false;
+  }
+  for(let i = 0; i < arry1.length; i++) {
+    if(arry1.sort()[i] !== arry2.sort()[i]) {
+      return false;
+    }
+  } return true;
+}
+let testArry1 = [3, 5, 4, 6, 1, 0, 2];
+let testArry2 = [3, 1, 5, 2, 4, 6, 0];
+let testArry3 = [3, 1, 9, 2, 4, 6, 3];
+console.log(matchingBST(testArry1, testArry2));
+console.log(matchingBST(testArry1, testArry3));

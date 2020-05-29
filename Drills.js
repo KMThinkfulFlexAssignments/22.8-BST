@@ -20,7 +20,7 @@ function numberBST() {
   
   return numberTree;
 }
-console.log(numberBST());
+//console.log(numberBST());
 
 function letterBST() {
   let letterTree = new BinarySearchTree;
@@ -39,7 +39,7 @@ function letterBST() {
 
   return letterTree;
 }
-console.log(letterBST());
+//console.log(letterBST());
 
 //4. What does this program do?
 /*
@@ -55,6 +55,27 @@ function tree(t){
 //Answer: This program sums the value of each node in the tree.
 
 //5. Height of a BST
+function treeHeight(tree) {
+  //check if tree is empty
+  if(tree === null) {
+    return 0;
+  } 
+  //check if tree is just a root
+  else if(tree.left === null && tree.right === null) {
+    return 1;
+  }
+  //check the left side
+  let leftHeight = treeHeight(tree.left);
+  //check the right side
+  let rightHeight = treeHeight(tree.right);
+  //return greater between leftHeight and rightHeight
+  if(leftHeight > rightHeight) {
+    return leftHeight + 1;
+  } return rightHeight + 1;
+}
+console.log(treeHeight(numberBST()));
+console.log(treeHeight(letterBST()));
+
 
 //6. Is it a BST?
 

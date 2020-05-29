@@ -73,13 +73,80 @@ function treeHeight(tree) {
     return leftHeight + 1;
   } return rightHeight + 1;
 }
-console.log(treeHeight(numberBST()));
-console.log(treeHeight(letterBST()));
-
+//console.log(treeHeight(numberBST()));
+//console.log(treeHeight(letterBST()));
 
 //6. Is it a BST?
+function isThisABST(tree) {
+  if(!tree) {
+    return false;
+  }
+  if(tree.value && (!tree.left && !tree.right)) {
+    return true;
+  }
+  if(tree.left) {
+    if(tree.left.key < tree.key) {
+      isThisABST(tree.left);
+    } else {
+      return false;
+    }
+  }
+  if(tree.right) {
+    if(tree.right.key > tree.key) {
+      isThisABST(tree.right);
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+function badTree() {
+  let invalidTree = new BinarySearchTree;
+  invalidTree.insert(1, 1);
+  invalidTree.insert(2, 2);
+  invalidTree.insert(3, 3);
+
+  return invalidTree;
+}
+
+//console.log(isThisABST(new BinarySearchTree));
+//console.log(isThisABST(numberBST()));
+//console.log(isThisABST(badTree()));
 
 //7. 3rd largest node
+function thirdLargest(tree) {
+  let current = tree;
+  let largest;
+  let count = 0;
+
+  while(current) {
+    if(!current.right) {
+      if(++count === 3 ) {
+        largest = current;
+      }
+      current = current.left;
+    } else {
+      let next = current.right;
+      while(next.left && next.left !== current) {
+        next = next.left;
+      }
+      if(next.left === null) {
+        next.left = current;
+        current = current.right;
+      } else {
+        next.left === null;
+        if(++count === 3) {
+          largest = current;
+        }
+        current = current.left;
+      }
+    }
+  }
+  return largest;
+}
+console.log(thirdLargest(numberBST()));
 
 //8. Balanced BST
 
